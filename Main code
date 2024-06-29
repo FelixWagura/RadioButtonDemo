@@ -1,0 +1,95 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class RadioButtonDemo extends JFrame {
+
+    private JRadioButton birdButton, catButton, dogButton, rabbitButton, pigButton;
+    private JLabel petImageLabel;
+
+    public RadioButtonDemo() {
+        // Set up the frame
+        setTitle("RadioButtonDemo");
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+
+        // Create panel for radio buttons
+        JPanel radioPanel = new JPanel();
+        radioPanel.setLayout(new GridLayout(5, 1));
+
+        // Initialize radio buttons
+        birdButton = new JRadioButton("Bird");
+        catButton = new JRadioButton("Cat");
+        dogButton = new JRadioButton("Dog");
+        rabbitButton = new JRadioButton("Rabbit");
+        pigButton = new JRadioButton("Pig");
+
+        // Add buttons to button group
+        ButtonGroup group = new ButtonGroup();
+        group.add(birdButton);
+        group.add(catButton);
+        group.add(dogButton);
+        group.add(rabbitButton);
+        group.add(pigButton);
+
+        // Add buttons to panel
+        radioPanel.add(birdButton);
+        radioPanel.add(catButton);
+        radioPanel.add(dogButton);
+        radioPanel.add(rabbitButton);
+        radioPanel.add(pigButton);
+
+        // Initialize label for pet image
+        petImageLabel = new JLabel();
+        petImageLabel.setHorizontalAlignment(JLabel.CENTER);
+
+        // Add action listeners for radio buttons
+        birdButton.addActionListener(new PetActionListener("Bird"));
+        catButton.addActionListener(new PetActionListener("Cat"));
+        dogButton.addActionListener(new PetActionListener("Dog"));
+        rabbitButton.addActionListener(new PetActionListener("Rabbit"));
+        pigButton.addActionListener(new PetActionListener("Pig"));
+
+        // Add components to frame
+        add(radioPanel, BorderLayout.WEST);
+        add(petImageLabel, BorderLayout.CENTER);
+
+        setVisible(true);
+    }
+
+    private class PetActionListener implements ActionListener {
+        private String pet;
+
+        public PetActionListener(String pet) {
+            this.pet = pet;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JOptionPane.showMessageDialog(null, "You selected: " + pet);
+            switch (pet) {
+                case "Bird":
+                    petImageLabel.setIcon(new ImageIcon("C:\Users\HP\Desktop\BBIT COURSE WORK\bird.jpeg"));
+                    break;
+                case "Cat":
+                    petImageLabel.setIcon(new ImageIcon("C:\Users\HP\Desktop\BBIT COURSE WORK\cat.jpeg"));
+                    break;
+                case "Dog":
+                    petImageLabel.setIcon(new ImageIcon("C:\Users\HP\Desktop\BBIT COURSE WORK\dog.jpeg"));
+                    break;
+                case "Rabbit":
+                    petImageLabel.setIcon(new ImageIcon("C:\Users\HP\Desktop\BBIT COURSE WORK\rabbit.jpeg"));
+                    break;
+                case "Pig":
+                    petImageLabel.setIcon(new ImageIcon("C:\Users\HP\Desktop\BBIT COURSE WORK\pig.jpeg"));
+                    break;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new RadioButtonDemo());
+    }
+}
